@@ -1,0 +1,66 @@
+<ion-content>
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+
+  <ion-item-group class="fixed">
+    <ion-item-group class="header">
+      <ion-label>HISTORY</ion-label>
+    </ion-item-group>
+
+    <ion-item-group class="content">
+      <ion-segment value="service" mode="ios" swipeGesture="false" (ionChange)="changedSegment($event.target.value)">
+        <ion-segment-button [ngClass]="{ 'has-border': currentSegmentValue != 'service' }" value="service"
+          (click)="scrollToTop($event)">
+          Services
+        </ion-segment-button>
+        <ion-segment-button [ngClass]="{ 'has-border': currentSegmentValue != 'event' }" value="event"
+          (click)="scrollToTop($event)">
+          Events
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item-group>
+  </ion-item-group>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item-group class="event-list-container" [ngClass]="{ 'display-none': currentSegmentValue != 'service' }">
+    <ion-list class="event-list">
+      <ion-item-group *ngFor="let event of data.services.array" class="event" (click)="openEventDetailModal(event)">
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="event-name">{{ event.name }}</h3>
+          <img class="triangle" src="assets/icon/triangle.svg">
+        </ion-buttons>
+        <span class="event-time">
+          {{ event.start_time.substring(11, 16) }} - {{ event.end_time.substring(11, 16) }} {{
+          event.start_time.substring(0, 10) }}
+        </span>
+        <p class="text three-dots-2 event-desc">{{ event.description }}</p>
+      </ion-item-group>
+      <ion-infinite-scroll *ngIf="data.services.array.length != 0 && !data.services.loadedData"
+        (ionInfinite)="loadMoreDataServices($event)">
+        <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </ion-item-group>
+
+  <ion-item-group class="event-list-container" [ngClass]="{ 'display-none': currentSegmentValue != 'event' }">
+    <ion-list class="event-list">
+      <ion-item-group *ngFor="let event of data.events.array" class="event" (click)="openEventDetailModal(event)">
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="event-name">{{ event.name }}</h3>
+          <img class="triangle" src="assets/icon/triangle.svg">
+        </ion-buttons>
+        <span class="event-time">
+          {{ event.start_time.substring(11, 16) }} - {{ event.end_time.substring(11, 16) }} {{
+          event.start_time.substring(0, 10) }}
+        </span>
+        <p class="text three-dots-2 event-desc">{{ event.description }}</p>
+      </ion-item-group>
+      <ion-infinite-scroll *ngIf="data.events.array.length != 0 && !data.events.loadedData"
+        (ionInfinite)="loadMoreDataEvents($event)">
+        <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </ion-item-group>
+</ion-content>

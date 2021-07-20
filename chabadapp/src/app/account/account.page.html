@@ -1,0 +1,81 @@
+<ion-content [ngClass]="{ 'ion-content-activated': activatedInput}">
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+
+  <div class="header">
+    <ion-label>ACCOUNT INFORMATION</ion-label>
+  </div>
+
+  <div class="user">
+    <ion-avatar class="user-img-container">
+      <img src="{{avatar}}" class="user-img main-box-shadow">
+      <button (click)="avatarSetting()"class="icon-edit" *ngIf="!activatedInput">
+        <img src="assets/img/edit2.svg"  >
+      </button>
+    </ion-avatar>
+    <ion-label *ngIf="loadedData && !activatedInput" class="edit-btn" (click)="activateInput()">Edit</ion-label>
+  </div>
+
+  <ion-list class="list">
+    <ion-backdrop *ngIf="!loadedData" class="backdrop-list"></ion-backdrop>
+
+    <form [formGroup]="form" (ngSubmit)="updateInfo()">
+      <div class="item">
+        <ion-label class="item-label">Your name</ion-label>
+        <ion-input class="item-content" maxlength="30" [readonly]="!activatedInput"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="full_name"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.full_name">
+          <div class="error-message"
+            *ngIf="form.get('full_name').hasError(validation.type) && (form.get('full_name').dirty || form.get('full_name').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <div class="item">
+        <ion-label class="item-label">Year of birth</ion-label>
+        <ion-datetime class="item-content" [readonly]="!activatedInput" [ngClass]="{ 'item-content-activated': activatedInput}"
+          formControlName="birthday" displayFormat="YYYY" min="1900" max="2021"></ion-datetime>
+      </div>
+      <div class="item">
+        <ion-label class="item-label">Phone number</ion-label>
+        <ion-input autocomplete="off" type="text" class="item-content" [readonly]="!activatedInput"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="phone_number"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.phone_number">
+          <div class="error-message"
+            *ngIf="form.get('phone_number').hasError(validation.type) && (form.get('phone_number').dirty || form.get('phone_number').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <div class="item">
+        <ion-label class="item-label">Email</ion-label>
+        <ion-input autocomplete="off" type="text" class="item-content" [readonly]="!activatedInput"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="email"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.email">
+          <div class="error-message"
+            *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <div class="item">
+        <ion-label class="item-label">Address</ion-label>
+        <ion-input class="item-content" [readonly]="!activatedInput" auto-grow="true"
+          [ngClass]="{ 'item-content-activated': activatedInput}" formControlName="full_address"></ion-input>
+        <ng-container *ngFor="let validation of validationMessages.full_address">
+          <div class="error-message"
+            *ngIf="form.get('full_address').hasError(validation.type) && (form.get('full_address').dirty || form.get('full_address').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </form>
+    <ion-label *ngIf="!activatedInput" class="change__password" (click)="openModalPassword()">
+      Change password
+    </ion-label>
+  </ion-list>
+  <ion-buttons class="footer" *ngIf="activatedInput">
+    <ion-button class="btn btn-cancel" (click)="deactivateInput()">Cancel</ion-button>
+    <ion-button class="btn btn-update-disabled" [ngClass]="{'btn-update': canUpdate()}" (click)="updateInfo()"
+      [disabled]="!canUpdate()">Update</ion-button>
+  </ion-buttons>
+</ion-content>

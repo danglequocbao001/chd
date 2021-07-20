@@ -1,0 +1,83 @@
+ion-content {
+  --background: transparent;
+}
+
+ion-refresher {
+  z-index: 10;
+}
+
+.heading {
+  color: #434141;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+  padding: 0 32px 10px;
+  margin: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: -4px;
+  background: #f5f5f5;
+}
+
+.chabad-list {
+  background: transparent;
+  margin-top: 38.67px;
+
+  @media screen and (max-width: 320px) {
+    margin-top: 67.33px;
+  }
+  .chabad {
+    margin-bottom: 30px;
+
+    .chabad-img-container {
+      margin: 0 15px;
+      height: 175px;
+      overflow: hidden;
+      border-radius: 30px;
+      position: relative;
+
+      .chabad-distance {
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #040404;
+        font-size: 14px;
+        background: rgba(#fff, 0.8);
+        padding: 10px 20px;
+        border-top-right-radius: 30px;
+      }
+    }
+
+    .chabad-info {
+      margin: 7px 28px;
+
+      .chabad-name {
+        color: #434141;
+        font-size: 20px;
+        font-weight: 600;
+        margin-right: 20px;
+        margin-top: 0;
+        text-align: left;
+      }
+
+      .btn-go {
+        display: inline-block;
+        color: #7e7e7e;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 3px 7px;
+        background: #e1e1e1;
+        border-radius: 8px;
+      }
+
+      .chabad-address {
+        color: #999393;
+        font-size: 14px;
+        margin: 0 0 0 8px;
+      }
+    }
+  }
+}

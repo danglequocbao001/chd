@@ -1,0 +1,134 @@
+<ion-content>
+  <ion-spinner *ngIf="!avatar" class="absolute-center" name="lines"></ion-spinner>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+  <ion-avatar class="avatar active-effect" (click)="goToUserInfo()">
+    <!-- <div 
+    [style.background-image]="getUrl()">
+  </div> -->
+    <img src="{{avatar}}" >
+    <!-- <img src="{{avatarReplace}}" alt=""*ngIf = "!avatar"> -->
+    <span class="circle avatar-note"></span>
+  </ion-avatar>
+
+  <ion-backdrop *ngIf="!hiddenDateList" class="backdrop-date-list" (click)="hideDateList()"></ion-backdrop>
+  <ion-backdrop *ngIf="!loadedChabad" class="backdrop-chabad"></ion-backdrop>
+
+  <div class="img-container img-wrapper main-box-shadow"
+    [style.background-image]="getChabadImageString()">
+  </div>
+
+  <ion-item-group class="chabad-info-container">
+    <ion-item-group class="chabad-info">
+      <ion-buttons class="ion-align-items-start ion-justify-content-between" (click)="goToMap()">
+        <h3 class="chabad-name">{{ chabad.name }}</h3>
+        <span class="btn-go active-effect">Go</span>
+      </ion-buttons>
+      <ion-buttons class="ion-align-items-start">
+        <img src="assets/icon/location-lite.svg">
+        <p class="chabad-address">{{ chabad.address }}</p>
+      </ion-buttons>
+    </ion-item-group>
+
+    <ion-buttons class="ion-justify-content-between">
+      <span class="chabad-distance">{{ distance }} km</span>
+      <ion-buttons>
+        <span class="btn btn-pray active-effect" (click)="goToPray()">Pray</span>
+        <span class="btn btn-donate active-effect" (click)="goToDonate()">Donate</span>
+      </ion-buttons>
+    </ion-buttons>
+
+    <ion-label class="label">Introduction</ion-label>
+    <p class="text chabad-introduction" [innerHTML]="chabad.description"></p>
+  </ion-item-group>
+</ion-content>
+
+<ion-footer class="ion-no-border" [ngClass]="{'high-footer': !hiddenDateList}">
+  <ion-item-group class="segment">
+    <div *ngIf="!hiddenDateList" class="background-high"></div>
+    <span *ngIf="hiddenDateList" class="line"></span>
+    <ion-buttons class="date-list">
+      <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
+        [ngClass]="{'active-date-item': activeDateItem == dateItem.id, 'active-date-time-high': activeDateItem == dateItem.id && !hiddenDateList}"
+        (click)="changeDateItem(dateItem)">
+        <span>{{ dateTimeService.DAYS[dateItem.day.getDay()].substring(0, 3) }}</span>
+        <span>{{ dateItem.day.getDate() }}</span>
+        <span *ngIf="dateItem.services.length != 0 || dateItem.events.length != 0" class="circle date-item-note"></span>
+      </ion-buttons>
+    </ion-buttons>
+
+    <p class="today">{{ dateTimeService.getDateString(currentDay) }}</p>
+
+    <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list" [ngClass]="{'display-none': hiddenDateList}">
+      <ion-item-group
+        *ngIf="(dateItem.services.length != 0 || dateItem.events.length != 0) && activeDateItem == dateItem.id"
+        class="btn-join btn-join-all active-effect" (click)="toggleJoiningAll(dateItem)">
+        <span *ngIf="!joinedAll(dateItem)">
+          <ion-spinner *ngIf="isSomeLoading(dateItem)" name="lines" class="spinner-max spinner-event-join"
+            (click)="$event.stopPropagation()"></ion-spinner>
+          Join all
+        </span>
+        <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
+      </ion-item-group>
+    </ion-item-group>
+
+    <ion-list [ngClass]="{ 'visibility-hidden': hiddenDateList }" class="service-list"
+      [style.background]="hiddenDateList ? '#fff' : '#EEEEEE'">
+      <ion-item-group *ngFor="let service of dateList[activeDateItem].services" class="service"
+        [style.background]="service.color" (click)="openEventDetailModal(service)">
+        <ion-backdrop *ngIf="service.isLoading" class="service-backdrop"></ion-backdrop>
+
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="service-name">{{ service.name }}</h3>
+          <ion-item-group class="btn-join active-effect" [style.color]="service.color"
+            (click)="toggleJoiningEvent(service)">
+            <ion-spinner *ngIf="service.isLoading" name="lines" class="spinner-max spinner-event-join"
+              (click)="$event.stopPropagation()"></ion-spinner>
+            <span *ngIf="!service.joined">Join</span>
+            <ion-icon *ngIf="service.joined" name="checkmark-outline"></ion-icon>
+          </ion-item-group>
+        </ion-buttons>
+        <span class="service-time">{{ service.start_time.substring(11, 16) }} - {{ service.end_time.substring(11, 16)
+          }}</span>
+        <p class="text three-dots-2 service-desc">{{ service.description }}</p>
+
+        <img src="assets/icon/three-dots.svg" class="three-dots-icon">
+      </ion-item-group>
+
+      <ion-item-group *ngIf="dateList[activeDateItem].events.length != 0" class="event">
+        <ion-buttons class="event-header active-effect" (click)="toggleHiddenEvents(dateList[activeDateItem])">
+          <img src="assets/icon/fruit.svg">
+          <ion-buttons>
+            <ion-label class="event-header-title">Event</ion-label>
+            <span class="triangle" [ngClass]="{'active-triangle': !dateList[activeDateItem].hiddenEvents}"></span>
+          </ion-buttons>
+        </ion-buttons>
+
+        <ion-list class="event-body" [ngClass]="{'event-body-full-height': !dateList[activeDateItem].hiddenEvents}">
+          <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="service event-item"
+            [style.background]="event.color" (click)="openEventDetailModal(event)">
+            <ion-backdrop *ngIf="event.isLoading" class="service-backdrop"></ion-backdrop>
+
+            <ion-buttons class="ion-align-items-start ion-justify-content-between">
+              <h3 class="service-name">{{ event.name }}</h3>
+              <ion-item-group class="btn-join btn-join-event active-effect" (click)="toggleJoiningEvent(event)">
+                <ion-spinner *ngIf="event.isLoading" name="lines" class="spinner-max spinner-event-join"
+                  (click)="$event.stopPropagation()"></ion-spinner>
+                <span *ngIf="!event.joined">Join</span>
+                <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
+              </ion-item-group>
+            </ion-buttons>
+            <span class="service-time">{{ event.start_time.substring(11, 16) }} - {{ event.end_time.substring(11, 16)
+              }}</span>
+            <p class="text three-dots-2 service-desc event-desc">{{ event.description }}</p>
+
+            <img src="assets/icon/three-dots-gray.svg" class="three-dots-icon">
+          </ion-item-group>
+        </ion-list>
+      </ion-item-group>
+    </ion-list>
+  </ion-item-group>
+</ion-footer>

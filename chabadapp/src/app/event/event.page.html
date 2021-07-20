@@ -1,0 +1,62 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+  <ion-avatar class="avatar active-effect" (click)="goToUserInfo()">
+    <img src="{{avatar}}">
+    <span class="circle avatar-note"></span>
+  </ion-avatar>
+  <ion-backdrop *ngIf="!loadedChabad" class="backdrop-chabad"></ion-backdrop>
+  <div class="img-container img-wrapper main-box-shadow"
+    [style.background-image]="getChabadImageString()">
+    <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-item-group class="segment">
+    <div class="background-high"></div>
+
+    <ion-buttons class="date-list">
+      <ion-buttons *ngFor="let dateItem of dateList" class="date-item main-box-shadow"
+        [ngClass]="{'active-date-item': activeDateItem == dateItem.id}" (click)="changeDateItem(dateItem)">
+        <span>{{ dateTimeService.DAYS[dateItem.day.getDay()].substring(0, 3) }}</span>
+        <span>{{ dateItem.day.getDate() }}</span>
+        <span *ngIf="dateItem.events.length != 0" class="circle date-item-note"></span>
+      </ion-buttons>
+    </ion-buttons>
+    <p class="today">{{ dateTimeService.getDateString(currentDay) }}</p>
+    <ion-item-group *ngFor="let dateItem of dateList" class="btn-all-list">
+      <ion-item-group *ngIf="dateItem.events.length != 0 && activeDateItem == dateItem.id"
+        class="btn-join btn-join-all active-effect" (click)="toggleJoiningAll(dateItem)">
+        <span *ngIf="!joinedAll(dateItem)">
+          <ion-spinner *ngIf="isSomeLoading(dateItem)" name="lines" class="spinner-max spinner-event-join"
+            (click)="$event.stopPropagation()"></ion-spinner>
+          Join all
+        </span>
+        <ion-icon *ngIf="joinedAll(dateItem)" name="checkmark-outline"></ion-icon>
+      </ion-item-group>
+    </ion-item-group>
+    <ion-list class="event-list">
+      <ion-item-group *ngFor="let event of dateList[activeDateItem].events" class="event"
+        [style.background]="event.color" (click)="openEventDetailModal(event)">
+        <ion-backdrop *ngIf="event.isLoading" class="event-backdrop"></ion-backdrop>
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="event-name">{{ event.name }}</h3>
+          <ion-item-group class="btn-join btn-join-event active-effect" [style.color]="event.color"
+            (click)="toggleJoiningEvent(event)">
+            <ion-spinner *ngIf="event.isLoading" name="lines" class="spinner-max spinner-event-join"
+              (click)="$event.stopPropagation()"></ion-spinner>
+            <span *ngIf="!event.joined">Join</span>
+            <ion-icon *ngIf="event.joined" name="checkmark-outline"></ion-icon>
+          </ion-item-group>
+        </ion-buttons>
+        <span class="event-time">{{ event.start_time.substring(11, 16) }} - {{ event.end_time.substring(11, 16)
+          }}</span>
+        <p class="text three-dots-2 event-desc">{{ event.description }}</p>
+
+        <img src="assets/icon/three-dots.svg" class="three-dots-icon">
+      </ion-item-group>
+    </ion-list>
+  </ion-item-group>
+</ion-footer>

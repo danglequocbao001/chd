@@ -1,0 +1,55 @@
+<ion-content>
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+
+  <ion-item-group class="fixed">
+    <ion-item-group class="header">
+      <ion-label>ORDERS HISTORY</ion-label>
+    </ion-item-group>
+
+    <ion-item-group class="content">
+      <ion-segment  mode="ios">
+        <ion-segment-button>
+          Your orders
+        </ion-segment-button>
+      </ion-segment>
+    </ion-item-group>
+  </ion-item-group>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item-group class="event-list-container">
+    <ion-list class="event-list">
+      <ion-item-group class="event" (click)="openOrderDetailModal(lastedData)" *ngIf="lastedData != null">
+        <ion-label style="color: #00b0b2;">Your lasted order</ion-label>
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="event-name">Order ID Number: {{lastedData.id}}</h3>
+          <img class="triangle" src="assets/icon/triangle.svg">
+        </ion-buttons>
+        <span class="event-time" [ngClass]="{ 'ion-label': lastedData.status == 'pending' }">
+          Order status: {{ lastedData.status }}
+        </span>
+        <span class="event-time">
+          Created at:  {{ lastedData.created_at.substring(0, 10) }} 
+        </span>
+      </ion-item-group>
+      <ion-item-group *ngFor="let order of data.orders.array | slice:0:data.orders.array.length-1" class="event" (click)="openOrderDetailModal(order)">
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="event-name">Order ID Number: {{ order.id }}</h3>
+          <img class="triangle" src="assets/icon/triangle.svg">
+        </ion-buttons>
+        <span class="event-time">
+          Order status: {{ order.status }}
+        </span>
+        <span class="event-time">
+          Created at: {{ order.created_at.substring(0, 10) }}
+        </span>
+      </ion-item-group>
+      <ion-infinite-scroll *ngIf="data.orders.array.length != 0 && !data.orders.loadedData"
+        (ionInfinite)="loadMoreDataOrders($event)">
+        <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+  </ion-item-group>
+</ion-content>

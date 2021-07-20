@@ -1,0 +1,73 @@
+<ion-header>
+    <div class="img__header img-wrapper main-box-shadow" [style.background-image]="getUrl()">
+      <!-- <ion-spinner *ngIf="!chabad.thumb_image" class="absolute-center" name="lines"></ion-spinner> -->
+    </div>
+    <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+  <ion-label class="title__chabad" >{{chabad.name}}</ion-label>
+</ion-header>
+
+<ion-content>
+ 
+  <ion-grid >
+    <form [formGroup] ="frmPray" (ngSubmit)="onSubmit()">
+    <ion-item-group class="group__day">
+      <ion-label class="label__donate">
+        Pray
+      </ion-label>
+      <ion-item-group  class="day"[ngClass]="{'change': id_change === item.id}" [ngClass]="{'changeactive': item.id === 0 && this.clicked == false }" *ngFor ="let item of dateList; index as i"(click)="displayDate(item)">
+        <ion-label class="circle" *ngIf="item.eventslength > 0"></ion-label>
+        <ion-label>
+          {{item.day}}
+        </ion-label>
+        <ion-label>
+          {{item.date}}
+        </ion-label>
+      </ion-item-group>
+
+    </ion-item-group>
+    <ion-label class="time">
+        {{DateObj}}
+    </ion-label>
+    <ion-label class="time">
+      Information:
+    </ion-label>
+    <ion-item-group class="time doladonate">
+      <ion-img src="assets/img/pen.svg" class="edit"></ion-img>
+      <ion-img src="assets/img/dola.svg"></ion-img>
+    <input formControlName="amount" (keyup)="call()"[(ngModel)] ="x">
+    <ion-label class="currency">
+      USD
+    </ion-label>
+    </ion-item-group>
+    <span class="require" *ngIf="required_mess">
+      {{message}}
+  </span>
+    <ion-item-group class="time purpose">
+      <ion-img src="assets/img/edit2.svg" class="edit__big"></ion-img>
+      <ion-label class="purpose__label">Purpose:</ion-label>
+      <textarea class="textarea" placeholder="Enter more information here..." formControlName="note"></textarea>
+    </ion-item-group>
+    <span class="require" *ngIf="required_purpose">
+      {{message_purpose}}
+    </span>
+    <ion-grid class="user__info">
+      <ion-row>
+        <ion-col size= "5">
+          <img *ngIf="isHidden == false" src="{{avatar}}">
+          <img *ngIf="isHidden == true" src="assets/img/avatar-people-disable.svg">
+          <ion-label *ngIf="isHidden == false" class="user__name">David</ion-label>
+          <ion-label *ngIf="isHidden == true" class="user__name_dis">David</ion-label>
+          <ion-label *ngIf="isHidden == false" class="btn__nameless" (click)="clickHidden($event)">Nameless</ion-label>
+          <ion-label *ngIf="isHidden == true" class="btn__nameless_dis" (click)="clickHidden($event)">Nameless</ion-label>
+          <ion-label class="thanks">Thank member!</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-button class="btn"type="submit" [disabled] ="frmPray.invalid">
+            Confirm
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </form>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,148 @@
+ion-content {
+  position: relative;
+  --background: #dcf7f8;
+  --overflow: hidden;
+}
+
+img {
+  width: 100%;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.select,
+.input {
+  background: #30b9bb;
+  border-radius: 5px;
+  padding: 5px;
+  color: #aefeff;
+  font-size: 16px;
+  border: 1px solid transparent;
+  height: 36px;
+  width: 100%;
+  outline: none;
+  --padding-start: 10px;
+  &:focus {
+    border: 1px solid #fff;
+  }
+}
+
+.error-message {
+  color: #ffeb00;
+  font-size: 13px;
+  margin: 6px;
+}
+
+.submit-btn {
+  color: #00b0b2;
+  --background: #dcf7f8;
+  --border-radius: 18px;
+  width: 45px;
+  height: 45px;
+}
+
+.body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 85vh;
+  background: #00b0b2;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+ion-segment {
+  border-radius: 40px;
+  --background: #0db9bb;
+  width: 320px;
+  max-width: calc(100vw - 20px);
+  margin: 20px auto;
+
+  ion-segment-button {
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Poppins";
+    color: #fff;
+    --border-radius: 40px;
+    height: 40px;
+
+    &::part(indicator-background) {
+      background: #faae41;
+    }
+  }
+}
+
+.group {
+  height: calc(85vh - 65px);
+  width: 80vw;
+  min-width: 300px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.form {
+  max-height: calc(100% - 90px);
+  overflow-y: scroll;
+  margin-bottom: 10px;
+
+  .forgot-password-btn {
+    color: #fff;
+    font-size: 12px;
+  }
+}
+
+.row-1 {
+  justify-content: space-between;
+
+  .name-box {
+    width: calc(100% - 100px - 10px);
+  }
+
+  .gender-box {
+    width: 100px;
+  }
+
+  .phone-number-box {
+    width: calc(100% - 60px - 10px);
+
+    .phone-number-body {
+      padding-left: 5px;
+      background: #30b9bb;
+      border-radius: 5px;
+
+      .country-code {
+        color: #fff;
+        font-weight: 700;
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .age-box {
+    width: 60px;
+  }
+}
+
+.country-code-select {
+  height: 28px;
+  width: 150px;
+  background: #5cc7c8;
+}
+
+.province-select {
+  margin: 0 5px;
+}
+
+.address-input {
+  margin-top: 8px;
+}

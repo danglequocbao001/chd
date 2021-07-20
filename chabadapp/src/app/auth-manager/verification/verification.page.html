@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="drop-back"></div>
+
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+
+  <ion-buttons class="top-block">
+    <h1 class="title">Verification</h1>
+    <p class="desc">Enter the verification code we just sent to your email</p>
+    <img src="assets/icon/forget-password.svg">
+  </ion-buttons>
+
+  <ion-buttons class="bottom-block">
+    <p class="label-bottom">Code</p>
+      <!-- <form [formGroup]="inputCode"(ngSubmit)="onSubmit()"> -->
+      <form [formGroup]="inputCode">
+        <ion-label class="block-input">
+        <input id="code1" class="input-tel" (keyup)="keytab($event,'code1', 'code1', 'code2')" type="number" formControlName="code1">
+        <input id="code2" class="input-tel" (keyup)="keytab($event,'code1', 'code2', 'code3')" type="number" formControlName="code2">
+        <input id="code3" class="input-tel" (keyup)="keytab($event,'code2', 'code3', 'code4')" type="number" formControlName="code3">
+        <input id="code4" class="input-tel" (keyup)="keytab($event,'code3', 'code4', 'code5')" type="number" formControlName="code4">
+        <input id="code5" class="input-tel" (keyup)="keytab($event,'code4', 'code5', 'code6')" type="number" formControlName="code5">
+        <input id="code6" class="input-tel" (keyup)="keytab($event,'code5', 'code6', 'code6')" type="number" formControlName="code6">
+      </ion-label>
+      <p class="wrong-code" [ngClass]="{'visibility-hidden': !wrongCode}">Wrong code! Try again</p>
+      <ion-buttons class="get-code-container">
+        <span class="get-code-label active-effect" (click)="resendCode()">Resend code ?</span>
+        <ion-icon name="chevron-forward-outline" class="get-code-icon active-effect" (click)="confirmCode()" ></ion-icon>
+      </ion-buttons>
+  </form>
+  </ion-buttons>
+
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-content>
+  <ion-backdrop class="backdrop-event-detail" [style.display]="loadedData ? 'none' : 'block'"></ion-backdrop>
+  <ion-item-group class="ion-text-center">
+    <span class="line"></span>
+  </ion-item-group>
+  <ion-item-group class="body">
+    <ion-buttons>
+      <h3 class="title">Detail of order ID: {{ order.id }}</h3>
+    </ion-buttons>
+    <ion-col class="details">
+      <ion-label class="detail">• Status: {{order.status}}</ion-label>
+      <ion-label class="detail">• Note: {{order.note}}</ion-label>
+      <span class="detail">• Delivered to: {{order.full_address}}</span>
+      <ion-label class="detail">• Receiver phone: {{order.phone_number_receiver}}</ion-label>
+      <ion-label class="detail">• Created at: {{ order.created_at.substring(0, 10) }}</ion-label>
+    </ion-col>
+    <ion-buttons>
+      <h3 class="title" style="margin-top: 20px">Order summary: </h3>
+    </ion-buttons>
+    <ion-list class="food-detail-cover">
+      <ion-buttons *ngFor="let order_detail of order.order_details" class="food-detail">
+        <!-- <ion-img src="{{fakeImg}}"></ion-img> -->
+        <span class="food-name">{{order_detail.food_name}}</span>
+        <ion-buttons class="amount" lines="none">
+          <span>x {{order_detail.amount}}</span>
+        </ion-buttons>
+        <span class="price">${{order_detail.total_price | number:'2.1-2'}}</span>
+      </ion-buttons>
+    </ion-list>
+    <ion-row class="group3-row-1">
+      <ion-label class="group3-row1-total">Total: ({{calTotalAmount()}} items)</ion-label>
+      <ion-label class="group3-row1-prices" >${{calTotalPrice() | number:'2.1-2'}}</ion-label>
+    </ion-row>
+    <ion-col>
+      <ion-button mode="ios" (click)="reallyWantCancelOrder(order.id)" [disabled]="isCanceled == 'The order is canceled' ">{{isCanceled}}</ion-button>
+    </ion-col>
+  </ion-item-group>
+</ion-content>

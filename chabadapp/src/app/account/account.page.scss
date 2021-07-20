@@ -1,0 +1,169 @@
+ion-content {
+    --padding-top: 79px;
+}
+
+.ion-content-activated {
+    --padding-bottom: 80px;
+}
+
+.header {
+    height: 79px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00b0b2;
+    font-size: 18px;
+    font-weight: 600;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #fff;
+    z-index: 9;
+
+    @media screen and (max-width: 320px) {
+        font-size: 14px;
+    }
+}
+
+.user {
+    width: 100%;
+    position: relative;
+    margin-bottom: 35px;
+    
+    .user-img-container {
+        width: 150px;
+        position: relative;
+        height: 150px;
+        margin: 0 auto;
+        ion-button {
+            position: absolute;
+        }
+        .user-img {
+            border-radius: 50%;
+            border: 1px solid #fff;
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon-edit {
+            background: #DDDDDD;
+            position: absolute;
+            top: 144px;
+            left: 50%;
+            transform: translate(25px, -50%);
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            border-radius: 7px;
+            outline:none;
+        }
+    }
+
+    .edit-btn {
+        color: #CBCBCB;
+        font-size: 14px;
+        border: 1px solid #cbcbcb;
+        border-radius: 15px;
+        padding: 4px 8px;
+        position: absolute;
+        bottom: 0;
+        left: calc(50% + 75px + 10px);
+        transition: .2s;
+
+        &:active {
+            background: #cbcbcb;
+            color: #fff;
+        }
+    }
+}
+
+.list {
+    width: 80vw;
+    min-width: 300px;
+    margin: 0 auto;
+
+    .item {
+        margin-bottom: 30px;
+        
+        .item-label {
+            color: #B0B0B0;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .item-content {
+            border-width: 1px;
+            border-style: solid;
+            border-color: transparent transparent #eeeeee transparent;
+            color: #777777;
+            font-size: 16px;
+            font-weight: 400;
+            --padding-start: 10px;
+
+            &:focus {
+                border-color: #00b0b2 !important;
+            }
+        }
+        
+        .item-content-activated {
+            border-radius: 10px;
+            border-color: #999;
+        }
+    }
+    .change__password {
+        float: right;
+        color: #00B0B2;
+        font-size: 14px;
+        text-decoration: underline ;
+        margin-bottom: 20px;
+    }
+}
+
+.footer {
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    justify-content: space-evenly;
+
+    .btn {
+        color: #fff;
+        text-transform: none;
+        font-size: 18px;
+        border-radius: 17px;
+        width: 150px;
+        height: 40px;
+    }
+
+    .btn-cancel {
+        background: #FBAD42;
+    }
+
+    .btn-update-disabled {
+        background: #CBCBCB;
+    }
+
+    .btn-update {
+        background: #00B0B2;
+    }
+}
+
+.error-message {
+    color: red;
+    font-size: 13px;
+    margin: 6px;
+}
+.my-class {
+    color: red;
+}
+
+.backdrop-list {
+    opacity: 1;
+    background: #fff;
+    z-index: 10;
+    outline: none;
+}

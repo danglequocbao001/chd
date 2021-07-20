@@ -1,0 +1,33 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <h1 class="heading">
+    Choose your Chabads!
+  </h1>
+
+  <ion-list class="chabad-list">
+    <ion-item-group *ngFor="let chabad of chabads" class="chabad" (click)="goToEvent(chabad)">
+      <div class="chabad-img-container img-wrapper main-box-shadow"
+        [style.background-image]="getChabadImageString(chabad)">
+        <span class="chabad-distance">{{ chabad.distance }}km</span>
+      </div>
+  
+      <ion-item-group class="chabad-info">
+        <ion-buttons class="ion-align-items-start ion-justify-content-between">
+          <h3 class="chabad-name">{{ chabad.name }}</h3>
+          <span class="btn-go active-effect" (click)="goToMap(chabad)">Go</span>
+        </ion-buttons>
+        <ion-buttons class="ion-align-items-start">
+          <img src="assets/icon/location-lite.svg">
+          <p class="chabad-address">{{ chabad.address }}</p>
+        </ion-buttons>
+      </ion-item-group>
+    </ion-item-group>
+  </ion-list>
+
+  <ion-infinite-scroll *ngIf="chabads.length != 0" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

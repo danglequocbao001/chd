@@ -1,0 +1,63 @@
+<ion-header>
+    <div class="img__header img-wrapper main-box-shadow" [style.background-image]="getUrl()">
+    </div>
+    <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+  <ion-label class="title__chabad">{{chabad.name}}</ion-label>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <form [formGroup] ="frmDonate" (ngSubmit)="onSubmit()" >
+      <ion-label class="label__donate">
+        Donate
+      </ion-label>
+      <ion-label class="info">
+        Information:
+      </ion-label>
+      <ion-item-group class="wrapper">
+        <ion-item-group class="time doladonate">
+          <ion-img src="assets/img/pen.svg" class="edit"></ion-img>
+          <ion-img src="assets/img/dola.svg"></ion-img>
+        <input  formControlName="amount" (keyup)="call()" [(ngModel)] ="x">
+        <ion-label class="currency">
+          USD
+        </ion-label>
+        </ion-item-group>
+        <span class="require" *ngIf="required_mess">
+          {{message}}
+      </span>
+        <ion-item-group class="time purpose">
+          <ion-img src="assets/img/edit2.svg" class="edit__big"></ion-img>
+          <ion-label class="purpose__label">Purpose:</ion-label>
+          <textarea class="textarea" placeholder="Enter more information here..."  formControlName="note" ></textarea>
+        
+        </ion-item-group>
+        <span class="require require__purpose" *ngIf="required_purpose">
+          {{message_purpose}}
+        </span>
+        <ion-grid class="user__info">
+          <ion-row>
+            <ion-col size= "5">
+              <!-- <img *ngIf="isHidden == false" src="{{avatar}}"> -->
+              <!-- <ion-avatar> -->
+                <img src="{{avatar}}" *ngIf="isHidden === false">
+              <img *ngIf="isHidden == true" src="assets/img/avatar-people-disable.svg">
+              <!-- </ion-avatar> -->
+              <!-- <img src="{{avatarReplace}}" alt=""*ngIf = "!avatar"> -->
+              <ion-label *ngIf="isHidden == false" class="user__name">David</ion-label>
+              <ion-label *ngIf="isHidden == true" class="user__name_dis">David</ion-label>
+              <ion-label *ngIf="isHidden == false" class="btn__nameless" (click)="clickHidden($event)">Nameless</ion-label>
+              <ion-label *ngIf="isHidden == true" class="btn__nameless_dis" (click)="clickHidden($event)">Nameless</ion-label>
+              <ion-label class="thanks">Thank member!</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <ion-button class="btn"type="submit"  [disabled] ="frmDonate.invalid" >
+                Confirm
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item-group>
+    </form>
+  </ion-grid>
+
+</ion-content>

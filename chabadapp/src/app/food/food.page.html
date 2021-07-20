@@ -1,0 +1,59 @@
+<ion-header class="ion-no-border">
+  <ion-back-button icon="chevron-back-outline" text="" class="back-btn"></ion-back-button>
+  <ion-item-group class="title-main">
+    <ion-label class="title-header">Food for you</ion-label>
+ </ion-item-group>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" style="z-index: 1;">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list lines="none" class="list-foods">
+    <ion-item-group *ngFor="let foodItem of listFood" class="item-food" (click)="addItem(foodItem)">
+      <ion-item lines="none" class="ion-align-items-start ion-no-padding">
+        <img [src]="foodItem.thumb_image">
+        <ion-item-group class="detail-food">
+          <h1 class="three-dots-2">{{foodItem.name}}</h1>
+          <p class="three-dots-4" class="three-dots-3" [innerHTML]="foodItem.description"></p>
+        </ion-item-group>
+      </ion-item>
+      <ion-item-group class="group-add-shop">
+        <ion-label class="text-price">
+          $ {{foodItem.price | number:'2.1-2'}}
+        </ion-label>
+        <img class="icon-add" src="assets/img/ion-add.svg" alt="">
+      </ion-item-group>
+    </ion-item-group>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="listFood.length != 0 && !loadedData" (ionInfinite)="loadMoreData($event)">
+    <ion-infinite-scroll-content loadingSpinner="lines"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer [ngClass]="{'ion-footer-add': anmCart === true }">
+  <ion-item-group  class="cart-group" [ngClass]="{'add-cart-amount': anmCart === true }">
+    <img (click)="goToFoodDetail()" class="img-cart-item"  src="assets/img/ion-cart.svg" alt="">
+      <span *ngIf="calTotalAmount() > 0" class="amount-cart">
+        <span> +{{calTotalAmount()}}</span>
+       </span>
+  </ion-item-group>
+  <ion-item-group class="ion-no-border" class="cart-main" [ngClass]="{'add-cart-main': anmCart === true }" >
+
+    
+    <ion-buttons lines="none" class="detail-cart" >
+      <h1 class="three-dots-2">{{currentItem.name}}</h1>
+      <ion-item-group class="cart-info">
+        <img (click)="plusItem()" class="icon-add" src="assets/img/ion-add.svg" alt="">
+        <ion-item-group class="count" >
+          <p >{{currentItem.amount}}</p>
+        </ion-item-group>
+        <img (click)="minusItem()" class="icon-add" src="assets/img/ion-remove.svg" alt="">
+      </ion-item-group>
+    </ion-buttons>
+    <ion-item-group class="btn-add-group" >
+      <ion-button (click)="clickButtonAdd()" class="btn-add">Add</ion-button>
+    </ion-item-group>
+    
+  </ion-item-group>
+</ion-footer>

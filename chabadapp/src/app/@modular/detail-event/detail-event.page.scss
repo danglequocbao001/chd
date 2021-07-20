@@ -1,0 +1,182 @@
+ion-content {
+  --background: #eee;
+}
+
+.backdrop-event-detail {
+  opacity: 1;
+  background: #eee;
+}
+
+.body {
+  padding: 5px 28px 28px;
+  overflow: scroll;
+
+  @media screen and (max-width: 320px) {
+    padding: 5px 10px 10px;
+  }
+
+  .line {
+    margin-bottom: 15px;
+  }
+}
+
+.title {
+  color: #434141;
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 100px;
+  margin-top: 0;
+  text-align: left;
+}
+
+.text {
+  color: #999393;
+  font-size: 14px;
+  line-height: 21px;
+  margin-top: 5px;
+}
+
+.btn-donate {
+  color: #434141;
+  background: #fff;
+  font-size: 14px;
+  min-width: 85px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 37px;
+  text-align: center;
+  padding: 0 10px;
+  position: fixed;
+  top: 27px;
+  right: 28px;
+  z-index: 1;
+
+  @media screen and (max-width: 320px) {
+    right: 10px;
+  }
+}
+
+.disabled-btn {
+  background: #CBCBCB !important;
+  color: #fff !important;
+}
+
+.date-box {
+  color: #999393;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.join {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 6px 28px 20px 28px;
+  background: #F4F4F4;
+
+  @media screen and (max-width: 320px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .join-title {
+    color: #797777;
+    font-size: 14px;
+  }
+
+  .btn-join-with-us {
+    color: #fff;
+    background: #00b0b2;
+    border-radius: 15px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    width: 45%;
+  }
+}
+
+.donate {
+  padding: 6px 28px 20px 28px;
+  background: #eee;
+  height: 195px;
+
+  @media screen and (max-width: 320px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .donors-list {
+    background: transparent;
+    height: calc(100% - 20px);
+    overflow-y: auto;
+
+    .donors-item {
+      font-size: 14px;
+      align-items: flex-start;
+      
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+  
+      .avatar {
+        margin-right: 15px;
+        width: 70px;
+  
+        .avatar-inner {
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          object-fit: cover;
+          img {
+            height: 70px;
+          }
+        }
+  
+        .avatar-name {
+          color: #434141;
+          font-weight: 700;
+          text-align: center;
+          margin-top: 5px;
+        }
+      }
+  
+      .info {
+        .info-title {
+          color: #797777;
+          font-weight: 500;
+        }
+  
+        .purpose-text {
+          color: #797777;
+          margin: 6px 0;
+        }
+  
+        .dollar {
+          color: #faae42;
+          font-size: 23px;
+        }
+  
+        .money {
+          color: #797777;
+          font-weight: 500;
+        }
+  
+        .thank-sentence {
+          color: #00b0b2;
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,157 @@
+// ion-content {
+//     display: flex;
+//     justify-content: center;
+//     text-align: center;
+//     ion-buttons {
+//         display: flex;
+//         justify-content: flex-end;
+//         .slide__skip {
+//             margin-top: 25%;
+//             display: block;
+//             color: #00B0B2;
+//             float: right;
+//             margin-bottom: 17%;
+//             @media screen and (max-height: 667px) {
+//                 margin-top: 18%;
+//                 margin-bottom: 14%;
+//             }
+//         }
+//     }
+//     .slide__image {
+//         display: inline-block;
+//         background-size: cover;
+//         margin: 0 auto;
+//         height: 300px;
+//         width: 100%;
+//         @media screen and (max-height: 667px) {
+//             height: 217px;
+//         }
+//     }
+//     .slide__title {
+//         font-size: 22px;
+//         color: #353535;
+//         display: block;
+//         margin-top: 17%;
+//         @media screen and (max-height: 667px) {
+//             margin-top: 14%;
+//         }
+//     }
+//     .slide__btn-next {
+//         font-size: 16px;
+//         text-transform: uppercase;
+//     }
+//     ion-button {
+//         display: block;
+//         margin: 30px auto;
+//         --background: #00b0b2;
+//         height: 33px;
+//         width: 80px;
+//         --border-radius: 20px;
+//         text-transform: capitalize;
+//     }
+//     ion-item-group {
+//         display: flex;
+//         justify-content: center;
+//         ion-label {
+//             width: 13px;
+//             height: 13px;
+//             margin: 0 7px;
+//             border-radius: 50%;
+//             background-color: #DBDBDB;
+//         }
+//         .activebg {
+//             background-color: #00B0B2;
+//         }
+//     }
+// }
+ion-content {
+    ion-buttons {
+                display: flex;
+                justify-content: flex-end;
+                .slide__skip {
+                    margin-top: 21%;
+                    display: block;
+                    color: #00B0B2;
+                    float: right;
+                    @media screen and (max-height: 667px) {
+                        margin-top: 18%;
+                    }
+                }
+            }
+
+    ion-slides {
+        height: 100%;
+        position: relative;
+      }
+      ion-button {
+                display: block;
+                margin: 30px auto;
+                --background: #00b0b2;
+                height: 33px;
+                width: 80px;
+                --border-radius: 20px;
+                text-transform: capitalize;
+            }
+      // ion-item-group {
+      //           display: flex;
+      //           justify-content: center;
+      //           ion-label {
+      //               width: 13px;
+      //               height: 13px;
+      //               margin: 0 7px;
+      //               border-radius: 50%;
+      //               background-color: #DBDBDB;
+      //           }
+      //           .activebg {
+      //               background-color: #00B0B2;
+      //           }
+      //       }
+      .slide__title {
+                font-size: 22px;
+                color: #353535;
+                display: block;
+                margin-top: 17%;
+                @media screen and (max-height: 667px) {
+                    margin-top: 14%;
+                }
+            }
+      .swiper-slide {
+        display: block;
+      }
+      .swiper-slide--none {
+        display: none;
+      }
+      .swiper-slide h2 {
+        margin-top: 2.8rem;
+      }
+  
+      .swiper-slide img {
+        max-height: 50%;
+        max-width: 80%;
+        margin: 60px 0 40px;
+        pointer-events: none;
+      }
+  
+      b {
+        font-weight: 500;
+      }
+  
+      p {
+        padding: 0 40px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--ion-color-step-600, #60646b);
+      }
+  
+      p b {
+        color: var(--ion-text-color, #000000);
+      }
+}
+:host ::ng-deep .swiper-pagination{
+  position: absolute;
+  bottom: 12vh!important;
+}
+:host ::ng-deep .swiper-pagination-bullet-active{
+  background: #00B0B2!important;
+
+}

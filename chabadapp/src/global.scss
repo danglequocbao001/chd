@@ -1,0 +1,201 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.active-effect {
+  transition: 0.15s;
+
+  &:active {
+    filter: brightness(90%);
+  }
+}
+.colorCancel {
+  color: #FBAD42;
+}
+.visibility-hidden {
+  visibility: hidden;;
+}
+
+.opacity-none {
+  opacity: 0;
+}
+
+.display-none {
+  display: none;
+}
+
+.over-flow-hidden {
+  overflow: hidden;
+}
+
+.over-flow-hidden-ion {
+  --overflow: hidden;
+}
+
+.back-btn {
+  display: inline-block;
+  color: #00b0b2;
+  background: #fff;
+  border-radius: 18px;
+  width: 45px;
+  height: 45px;
+  position: fixed;
+  top: 17px;
+  left: 17px;
+  z-index: 10;
+}
+
+.two-lines {
+  height: 45px;
+  padding: 17px;
+  position: absolute;
+  top: 17px;
+  right: 0;
+}
+
+.main-box-shadow {
+  box-shadow: 0 4px 4px rgba(#000, 0.25);
+}
+
+.three-dots-1 {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.three-dots-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.three-dots-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.three-dots-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-wrapper {
+  background-size: cover;
+  background-position: center center;
+}
+
+.line {
+  width: 40px;
+  height: 3px;
+  background: #bdbdbd;
+  display: inline-block;
+  border-radius: 12px;
+}
+
+.event-detail-modal {
+  padding-top: 79px;
+
+  .modal-shadow.sc-ion-modal-ios {
+    top: 79px;
+  }
+
+  .modal-wrapper {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+}
+
+.spinner-max {
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+.modal__logout {
+    --height: 200px;
+    .modal-wrapper {
+        position: absolute;
+        bottom: 0;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+    }
+}
+.modal__payment {
+  --height: 380px;
+  .modal-wrapper {
+    border-radius: 17px;
+}
+}
+.modalPassword {
+  --height: 405px;
+  --width: 92%;
+    .modal-wrapper {
+      border-radius: 20px;
+   }
+}
+
+.modalFood {
+  --height: 200px;
+  --width: 90%;
+  .modal-wrapper {
+    border-radius: 20px;
+  }
+}
+
+.modalEditAvatar {
+  --height: 200px;
+  --width: 90%;
+  .modal-wrapper {
+    border-radius: 20px;
+  }
+}
+.my-custom-class {
+  --backdrop-opacity: 0.49 !important;
+  .popover-content {
+    --min-width: 80%;
+}
+}
+.image_popover_css {
+  // --backdrop-opacity: 1 !important;
+  .popover-content {
+    --min-width: 90%;
+    --min-height: 30%;
+ }
+}

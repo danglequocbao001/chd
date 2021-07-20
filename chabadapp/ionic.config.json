@@ -1,0 +1,7 @@
+{
+  "name": "chabadapp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,129 @@
+ion-content {
+    --background:#fff;
+    position: relative;
+    --overflow: hidden;
+}
+
+.header {
+    height: 79px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00b0b2;
+    font-size: 18px;
+    font-weight: 600;
+
+    @media screen and (max-width: 320px) {
+        font-size: 14px;
+    }
+}
+
+.body {
+    background: #F5F5F5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 155px);
+    border: 3px solid #fff;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+}
+
+.user {
+    position: absolute;
+    top: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+    
+    .user-img-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        ion-spinner {
+            top: 40%;
+        }
+        .user-img {
+            border-radius: 50%;
+            border: 1px solid #fff;
+            width: 100%;
+            height: 100%;
+        }
+
+        .icon-edit {
+            background: #DDDDDD;
+            position: absolute;
+            top: 144px;
+            left: 50%;
+            transform: translate(25px, -50%);
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            border-radius: 7px;
+        }
+    }
+
+    .user-name {
+        color: #838383;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.5;;
+    }
+}
+
+.settings {
+    width: 80vw;
+    min-width: 300px;
+    margin: 150px auto 0;
+    background: transparent;
+    transition: .2s;
+    overflow-y: auto;
+    height: calc(100% - 148px);
+    
+    ion-buttons {
+        border: 1px solid #FFFFFF;
+        border-radius: 10px;
+        height: 40px;
+        margin-bottom: 5px;
+        padding: 0 20px;
+        justify-content: space-between;
+
+        &:active {
+            background: #fff;
+        }
+
+        ion-label {
+            color: #666666;
+            font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-height: 480px) {
+    .body {
+        height: calc(100vh - 120px);
+    }
+
+    .user {
+        top: -50px;
+        
+        .user-img-container {
+            width: 100px;
+            height: 100px;
+          
+            .icon-edit {
+                top: 94px;
+                transform: translate(18px, -50%);
+            }
+        }
+        
+    }
+
+    .settings {
+        margin-top: 120px;
+        height: calc(100% - 118px);
+    }
+}
